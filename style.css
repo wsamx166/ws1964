@@ -1,0 +1,766 @@
+/* تصميم CSS لجمالية الواجهة */
+:root {
+    --primary-color: #00BCD4; /* أزرق سماوي */
+    --primary-dark: #0097A7;
+    --secondary-color: #FF5722; /* برتقالي */
+    --accent-color: #FFC107; /* أصفر ذهبي للإبراز */
+    --text-color: #E0F7FA; /* أبيض فاتح */
+    --light-text-color: #B2EBF2;
+    --border-color: #4DD0E1;
+    --shadow-light: rgba(0, 188, 212, 0.2);
+    --shadow-medium: rgba(0, 151, 167, 0.4);
+    --red-number-color: rgba(255, 0, 0, 0.6); /* لون أحمر جديد للأرقام المتساقطة */
+
+    /* ألوان جديدة لواجهة الدردشة */
+    --chat-bg-color: #21252b; /* خلفية صندوق الدردشة */
+    --chat-header-bg: #282c34; /* خلفية رأس الدردشة */
+    --chat-message-received-bg: #3e4451; /* خلفية رسالة المستلم */
+    --chat-message-sent-bg: #61afef; /* خلفية رسالة المرسل */
+    --chat-input-bg: #3e4451; /* خلفية حقل الإدخال */
+    --chat-border-color: #3a3f4b; /* لون الحدود في الدردشة */
+    --chat-text-color: #abb2bf;
+    --chat-sender-name-color: #98c379;
+    --chat-timestamp-color: #7f848e;
+    --chat-button-bg: #61afef;
+    --chat-button-hover: #5691d0;
+    --chat-upload-bg: #c678dd;
+    --chat-upload-hover: #b060ca;
+    --chat-link-color: #c678dd;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* خلفية أكواد البرمجة - الصورة السابقة */
+    background: url(http://googleusercontent.com/image_generation_content/2) no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+    direction: rtl;
+    text-align: right;
+    overflow: hidden; /* لمنع ظهور scrollbars غير مرغوبة */
+    position: relative; /* ضروري لتحديد موقع الأرقام المتساقطة */
+}
+
+/* طبقة شفافة فوق الخلفية لجعل النص مقروءًا */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(33, 33, 33, 0.7); /* أسود شفاف */
+    z-index: 1;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.1); /* أبيض شفاف */
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px var(--shadow-medium);
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    animation: fadeInScale 1s ease-out forwards;
+    position: relative;
+    z-index: 2;
+    border: 1px solid var(--border-color); /* إضافة حدود */
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.login-container h2 {
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    font-size: 2.5em;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.login-container p.subtitle {
+    color: var(--light-text-color);
+    margin-bottom: 35px;
+    font-size: 1.1em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.input-group {
+    margin-bottom: 28px;
+    position: relative;
+    text-align: right;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.05em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Open Sans', sans-serif;
+    text-align: right;
+    background-color: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
+    color: var(--text-color); /* لون النص */
+}
+
+.input-group input[type="password"]:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.2);
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    letter-spacing: 0.8px;
+    font-family: 'Cairo', sans-serif;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow-light);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.error-message {
+    color: #FFEB3B;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.05em;
+    display: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.success-message {
+    color: #00E676;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.05em;
+    display: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* أنماط الأرقام المتساقطة */
+.falling-number {
+    position: absolute;
+    color: var(--red-number-color);
+    font-size: 1.5em;
+    font-weight: bold;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+/* تأثير سقوط الأرقام */
+@keyframes fall {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(100vh); opacity: 0.8; }
+}
+
+/* ------------------------------------------- */
+/* تحسينات الاستجابة (Responsive Enhancements) لصفحة الدخول */
+/* ------------------------------------------- */
+
+@media (max-width: 768px) {
+    .login-container {
+        padding: 30px 25px;
+        max-width: 95%;
+    }
+    .login-container h2 {
+        font-size: 2.2em;
+    }
+    .login-container p.subtitle {
+        font-size: 1em;
+    }
+    .input-group label {
+        font-size: 1em;
+    }
+    .input-group input[type="password"] {
+        font-size: 1.1em;
+        padding: 12px 14px;
+    }
+    button {
+        font-size: 1.2em;
+        padding: 14px;
+    }
+    .falling-number {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 25px 20px;
+        margin: 15px;
+    }
+    .login-container h2 {
+        font-size: 1.8em;
+    }
+    .login-container p.subtitle {
+        font-size: 0.9em;
+    }
+    .input-group label {
+        font-size: 0.95em;
+    }
+    .input-group input[type="password"] {
+        font-size: 1em;
+        padding: 10px 12px;
+    }
+    button {
+        font-size: 1.1em;
+        padding: 12px;
+    }
+    .falling-number {
+        font-size: 1em;
+    }
+}
+
+/* ------------------------------------------- */
+/* أنماط غرفة الدردشة المحسّنة */
+/* ------------------------------------------- */
+
+body.chat-page {
+    background: none;
+    background-color: #1a1e24; /* خلفية أغمق للدردشة */
+    color: var(--chat-text-color);
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+body.chat-page .overlay,
+body.chat-page .falling-number {
+    display: none;
+}
+
+.chat-wrapper {
+    background-color: var(--chat-bg-color);
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 1000px; /* أقصى عرض أكبر */
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 20px auto;
+    border: 1px solid var(--chat-border-color);
+}
+
+.chat-header {
+    background-color: var(--chat-header-bg);
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--chat-border-color);
+    text-align: center;
+    color: #61afef;
+    font-size: 1.1em;
+    position: relative;
+    display: flex; /* لتوسيط العنوان مع وجود الزر */
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 700;
+    flex-grow: 1; /* لجعل العنوان يأخذ المساحة المتاحة ويتوسط */
+}
+
+.chat-header p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: var(--chat-text-color);
+    position: absolute; /* لجعل الوصف يظهر تحت العنوان */
+    bottom: 5px;
+    left: 0;
+    right: 0;
+}
+
+.chat-header .profile-settings-button {
+    background: none;
+    border: none;
+    color: var(--chat-text-color);
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    top: 15px; /* ضبط الموضع ليتناسب مع التصميم الجديد */
+    left: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.chat-header .profile-settings-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px 25px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #282c34;
+}
+
+/* Scrollbar Styling */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+
+.message {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.message.sent {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.message.received {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.message p {
+    background-color: var(--chat-message-received-bg);
+    padding: 12px 18px;
+    border-radius: 18px;
+    margin: 5px 0 2px;
+    color: #e0f7fa;
+    line-height: 1.5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.05em;
+}
+
+.message.sent p {
+    background-color: var(--chat-message-sent-bg);
+    color: #ffffff;
+}
+
+.sender-name {
+    font-size: 0.85em;
+    color: var(--chat-sender-name-color);
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.timestamp {
+    font-size: 0.75em;
+    color: var(--chat-timestamp-color);
+    margin-top: 3px;
+}
+
+.message img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.message a {
+    color: var(--chat-link-color);
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    font-size: 0.95em;
+}
+
+.message a:hover {
+    text-decoration: underline;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 15px 25px;
+    background-color: var(--chat-bg-color);
+    border-top: 1px solid var(--chat-border-color);
+    align-items: center;
+    direction: ltr; /* لجعل العناصر تتجه من اليسار إلى اليمين */
+}
+
+.chat-input-area .input-wrapper {
+    flex-grow: 1;
+    margin-right: 10px; /* مسافة بين حقل الإدخال والأزرار على اليمين */
+}
+
+.chat-input-area input#messageInput {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--chat-border-color);
+    border-radius: 25px;
+    background-color: var(--chat-input-bg);
+    color: var(--chat-text-color);
+    font-size: 1.05em;
+    outline: none;
+    margin-left: 0;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    direction: rtl; /* لضمان أن الكتابة تكون من اليمين لليسار داخل الحقل */
+}
+
+.chat-input-area input#messageInput:focus {
+    border-color: #61afef;
+    box-shadow: 0 0 0 3px rgba(97, 175, 239, 0.3);
+}
+
+.chat-input-area button,
+.chat-input-area .upload-button {
+    background-color: var(--chat-button-bg);
+    color: white;
+    border: none;
+    border-radius: 50%; /* جعل الأزرار دائرية */
+    width: 45px; /* تحديد عرض ثابت للأزرار */
+    height: 45px; /* تحديد ارتفاع ثابت للأزرار */
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px; /* مسافة بين الأزرار */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.chat-input-area .upload-button {
+    background-color: var(--chat-upload-bg);
+    font-size: 1.5em;
+}
+
+.chat-input-area button:hover {
+    background-color: var(--chat-button-hover);
+    transform: translateY(-2px);
+}
+
+.chat-input-area .upload-button:hover {
+    background-color: var(--chat-upload-hover);
+    transform: translateY(-2px);
+}
+
+.chat-input-area button:active,
+.chat-input-area .upload-button:active {
+    transform: translateY(0);
+}
+
+.chat-input-area button#sendMessage svg.send-icon {
+    width: 24px;
+    height: 24px;
+    fill: white; /* لون أيقونة الإرسال */
+}
+
+/* الاستجابة على الأجهزة الصغيرة للدردشة */
+@media (max-width: 768px) {
+    body.chat-page {
+        padding: 0;
+    }
+    .chat-wrapper {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    .chat-header {
+        padding: 15px 20px;
+    }
+    .chat-header h2 {
+        font-size: 1.5em;
+    }
+    .chat-header .profile-settings-button {
+        top: 10px;
+        left: 10px;
+        font-size: 1.3em;
+    }
+
+    .chat-messages {
+        padding: 15px;
+    }
+
+    .chat-input-area {
+        flex-wrap: nowrap;
+        padding: 10px 15px;
+        direction: ltr; /* لضمان الترتيب الصحيح */
+    }
+
+    .chat-input-area .input-wrapper {
+        margin-right: 5px;
+    }
+
+    .chat-input-area input#messageInput {
+        padding: 10px 12px;
+        border-radius: 20px;
+        font-size: 1em;
+    }
+
+    .chat-input-area button,
+    .chat-input-area .upload-button {
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+    }
+
+    .chat-input-area button#sendMessage svg.send-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+/* ------------------------------------------- */
+/* أنماط نافذة الملف الشخصي (Profile Modal) */
+/* ------------------------------------------- */
+
+.profile-modal {
+    display: none; /* مخفي افتراضيًا */
+    position: fixed; /* يبقى في مكانه حتى عند التمرير */
+    z-index: 100; /* أعلى من أي شيء آخر */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* تمكين التمرير إذا كان المحتوى طويلًا جدًا */
+    background-color: rgba(0,0,0,0.6); /* خلفية سوداء شفافة أكثر */
+    backdrop-filter: blur(5px); /* تأثير ضبابي على الخلفية (اختياري، قد لا يدعم كل المتصفحات) */
+    display: flex; /* لتوسيط المحتوى */
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-modal-content {
+    background-color: var(--chat-bg-color);
+    padding: 25px;
+    border: 1px solid var(--chat-border-color);
+    width: 90%; /* يمكن تعديل العرض حسب الحاجة */
+    max-width: 450px;
+    border-radius: 15px;
+    position: relative;
+    color: var(--chat-text-color);
+    text-align: right;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* ظل أقوى */
+    animation: modalPopUp 0.3s ease-out forwards;
+}
+
+@keyframes modalPopUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+.close-button {
+    color: #aaa;
+    float: left;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+}
+
+.profile-modal-content h3 {
+    color: #61afef;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.profile-image-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.profile-image-container img {
+    border-radius: 50%;
+    border: 3px solid #61afef; /* إطار أزرق حول الصورة */
+    object-fit: cover;
+    width: 100px; /* حجم أكبر للصورة */
+    height: 100px;
+    box-shadow: 0 0 10px rgba(97, 175, 239, 0.3);
+}
+
+.upload-profile-image-button {
+    display: inline-block;
+    margin: 15px auto 0;
+    padding: 10px 20px;
+    background-color: var(--chat-upload-bg);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-profile-image-button:hover {
+    background-color: var(--chat-upload-hover);
+    transform: translateY(-2px);
+}
+
+.profile-info {
+    margin-bottom: 20px;
+}
+
+.profile-info label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--chat-sender-name-color);
+    font-size: 1.05em;
+}
+
+.profile-info input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--chat-border-color);
+    border-radius: 8px;
+    background-color: var(--chat-input-bg);
+    color: var(--chat-text-color);
+    box-sizing: border-box;
+    outline: none;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-info input:focus {
+    border-color: #61afef;
+    box-shadow: 0 0 0 3px rgba(97, 175, 239, 0.3);
+}
+
+.profile-info input#userId {
+    background-color: #444;
+    cursor: not-allowed;
+    display: inline-block;
+    width: calc(100% - 90px); /* لترك مساحة لزر تغيير الـ ID */
+    margin-left: 10px;
+}
+
+#generateNewId {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: #222;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#generateNewId:hover {
+    background-color: #e0b000;
+    transform: translateY(-2px);
+}
+
+#saveProfileInfo {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: #222;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 25px;
+}
+
+#saveProfileInfo:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .profile-modal-content {
+        padding: 20px;
+    }
+    .profile-modal-content h3 {
+        font-size: 1.5em;
+    }
+    .profile-image-container img {
+        width: 80px;
+        height: 80px;
+    }
+    .upload-profile-image-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .profile-info input {
+        padding: 10px 12px;
+    }
+    .profile-info input#userId {
+        width: calc(100% - 75px);
+        margin-left: 5px;
+    }
+    #generateNewId {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+    #saveProfileInfo {
+        padding: 12px;
+        font-size: 1em;
+    }
+}

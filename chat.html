@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غرفة الدردشة الخاصة بالأصدقاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-wrapper">
+        <div class="chat-header">
+            <button class="profile-settings-button" title="إعدادات الملف الشخصي">
+                <span>&#8942;</span> </button>
+            <h2>مساحة أصدقاء البرمجة</h2>
+            <p>أهلاً بك في غرفتك الخاصة!</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            </div>
+        <div class="chat-input-area">
+            <button id="sendMessage" title="إرسال الرسالة">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="send-icon">
+                    <path d="M3.4 20.4l17.45-7.49c.44-.19.73-.64.73-1.13s-.29-.94-.73-1.13L3.4 3.6c-.41-.18-.88-.11-1.22.18-.34.29-.47.74-.3.98L7.3 12 2.1 19.2c-.17.24-.04.7.3.98.34.29.81.36 1.22.18z"></path>
+                </svg>
+            </button>
+            <label for="fileUpload" class="upload-button" title="إرسال ملف">
+                📎
+                <input type="file" id="fileUpload" style="display: none;">
+            </label>
+            <label for="imageUpload" class="upload-button" title="إرسال صورة">
+                🖼️
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            </label>
+            <div class="input-wrapper">
+                <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..." dir="rtl">
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-modal-content">
+            <span class="close-button" title="إغلاق">&times;</span>
+            <h3>ملف المستخدم</h3>
+            <div class="profile-image-container">
+                <img src="default-profile.png" alt="صورة الملف الشخصي" id="profileImageDisplay" width="80" height="80">
+                <label for="profileImageUpload" class="upload-profile-image-button">تغيير الصورة</label>
+                <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+            </div>
+            <div class="profile-info">
+                <label for="userName">اسم المستخدم:</label>
+                <input type="text" id="userName" placeholder="أدخل اسمك">
+            </div>
+            <div class="profile-info">
+                <label for="userHandle">اسم المستخدم (يوزر):</label>
+                <input type="text" id="userHandle" placeholder="اختر يوزر فريد">
+            </div>
+            <div class="profile-info">
+                <label for="userId">ID الخاص بك:</label>
+                <input type="text" id="userId" value="0000" readonly>
+                <button type="button" id="generateNewId">تغيير ID</button>
+            </div>
+            <button type="button" id="saveProfileInfo">حفظ المعلومات</button>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>
